@@ -1,6 +1,7 @@
-"use client"
-import { Activity } from "@/types"
+import { Activity } from "@/lib/definitions"
 import { Separator } from "@/components/ui/separator"
+import Image from "next/image"
+import bill from "../../public/bill.svg"
 
 type ActivityProps = {
     activity: Activity
@@ -32,8 +33,13 @@ export default function ActivityField({ activity }: ActivityProps) {
 
     return (
         <div className="w-full">
-            {activity.content}
-            {formatDate(activity.date)}
+            <div className="flex">
+                <Image src={bill /*expense.category*/} alt="Bill icon" width={35} height={35} />
+                <div>
+                    {activity.content}
+                    {formatDate(activity.date)}
+                </div>
+            </div>
             <Separator />
         </div>
     )

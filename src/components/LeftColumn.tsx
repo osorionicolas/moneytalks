@@ -1,5 +1,5 @@
 "use client"
-import { Flag, List, Plus } from "lucide-react"
+import { Flag, Home, List, Plus } from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import Link from "next/link"
@@ -12,6 +12,12 @@ export default function LeftColumn() {
     return (
         <div className="basis-5/12 items-end">
             <div className="p-4">
+                <div>
+                    <Link href="/dashboard" className="flex">
+                        <Home />
+                        Dashboard
+                    </Link>
+                </div>
                 <div>
                     <Link href="/activity" className="flex">
                         <Flag />
@@ -34,14 +40,18 @@ export default function LeftColumn() {
                             </Link>
                         </Button>
                     </div>
-                    <div></div>
+                    <div>
+                        
+                    </div>
                 </div>
                 <div>
                     <div className="flex bg-gray-100">
                         Friends
                         <FriendModal />
                     </div>
-                    <div></div>
+                    <div>
+
+                    </div>
                 </div>
             </div>
         </div>

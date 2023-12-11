@@ -57,11 +57,37 @@ model Group {
   id            String    @id @default(cuid())
   name          String?
   image         String?
-  users         User[]
+  members       User[]
+  whiteboard    String?
+      id: number
+    cover: string
+    createdAt: Date
+    inviteLink: URL
+    groupType: GroupType
+    originalDebts: any
+    simplifiedDebts: any
 }
 
 model Expense {
   id            String    @id @default(cuid())
-  name          String?
-  image         String?
+  description   String
+  comments      String?
+  category      String
+  createdAt     DateTime
+  createdBy     User
+  updatedAt     DateTime?
+  updatedBy     User?
+  cost          Int
+  currency      String
+  groupId:      Int
+  repayment: Repayment[]
+}
+
+model Notification {
+  content     String
+  createdAt   DateTime
+  createdBy   Int
+  id: number
+  source: any
+  image       String?
 }

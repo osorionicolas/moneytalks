@@ -1,10 +1,10 @@
 import ExpenseField from "@/components/ExpenseField"
 import { ExpenseModal } from "@/components/ExpenseModal"
-import { Category } from "@/types"
+import { Category, Expense } from "@/lib/definitions"
 import Image from "next/image"
+import SectionHeader from "@/components/SectionHeader"
 
 export default function All() {
-    //const expenses = useExpenses()
     const expense = {
         id: 1,
         category: Category.FOOD_AND_DRINK,
@@ -24,13 +24,14 @@ export default function All() {
             firstName: "Nicolas",
         },
     }
+    const expenses: Expense[] = [expense]
+
     return (
         <>
-            <div className="flex">
-                All expenses
-                <ExpenseModal title="Add an expense" isCreation={true} />
-            </div>
-            <ExpenseField expense={expense} />
+            <SectionHeader title="All expenses" />
+            {expenses.map((expense: Expense) => (
+                <ExpenseField expense={expense} showGroup={true} key={expense.id} />
+            ))}{" "}
         </>
     )
 }

@@ -1,4 +1,4 @@
-enum GroupType {
+export enum GroupType {
     HOME,
     TRIP
 }
@@ -34,15 +34,15 @@ export type Group = {
     cover: string
     createdAt: Date
     name: string
-    members: User
-    inviteLink: URL
+    members: User[]
+    inviteLink: string
     groupType: GroupType
-    whiteboard: string
+    whiteboard?: string
     originalDebts: any
     simplifiedDebts: any
 }
 
-type User = {
+export type User = {
     id: number
     country: string
     defaultCurrency: string

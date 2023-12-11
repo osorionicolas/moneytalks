@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { MainResponse, RegistrationStatus } from "../../../types"
+import { MainResponse, RegistrationStatus } from "../../../lib/definitions"
 
 export async function GET() {
     //const data = await res.json()
