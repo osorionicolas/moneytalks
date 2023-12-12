@@ -6,7 +6,7 @@ import SectionHeader from "@/components/SectionHeader"
 
 export default function All() {
     const expense = {
-        id: 1,
+        id: "1",
         category: Category.FOOD_AND_DRINK,
         description: "Mercadona",
         cost: 100,
@@ -18,7 +18,7 @@ export default function All() {
                 amount: 1.0,
             },
         ],
-        groupId: 1,
+        groupId: "1",
         createdAt: new Date(),
         createdBy: {
             firstName: "Nicolas",

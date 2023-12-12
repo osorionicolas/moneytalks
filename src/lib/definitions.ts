@@ -19,7 +19,7 @@ export enum Category {
 }
 
 export type Friend = {
-    id: number
+    id: string
     email: string
     firstName: string
     lastName?: string
@@ -30,12 +30,11 @@ export type Friend = {
 }
 
 export type Group = {
-    id: number
+    id: string
     cover: string
     createdAt: Date
     name: string
     members: User[]
-    inviteLink: string
     groupType: GroupType
     whiteboard?: string
     originalDebts: any
@@ -43,7 +42,7 @@ export type Group = {
 }
 
 export type User = {
-    id: number
+    id: string
     country: string
     defaultCurrency: string
     dateFormat: string
@@ -55,11 +54,12 @@ export type User = {
     avatar: string
 }
 
-type Notification = {
+export type Notification = {
+    id: string
+    category: string
     content: string
     createdAt: Date
-    createdBy: number
-    id: number
+    createdBy: string
     source: any
     image: string
 }
@@ -80,7 +80,7 @@ type Repayment = {
 }
 
 export type Expense = {
-    id: number
+    id: string
     category: any
     comments?: string
     createdAt: Date
@@ -90,7 +90,7 @@ export type Expense = {
     cost: number
     currency: string
     description: string
-    groupId: number
+    groupId: string
     repayment: Repayment[]
 }
 
@@ -101,12 +101,4 @@ export type MainResponse = {
     user: User
     notifications: Notification[]
     metadata: Metadata
-}
-
-export type Activity = {
-    id: number
-    category: string
-    image: string
-    content: string
-    date: Date
 }

@@ -1,10 +1,10 @@
-import { Activity } from "@/lib/definitions"
+import { Notification } from "@/lib/definitions"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import bill from "../../public/bill.svg"
 
 type ActivityProps = {
-    activity: Activity
+    activity: Notification
 }
 
 export default function ActivityField({ activity }: ActivityProps) {
@@ -37,7 +37,7 @@ export default function ActivityField({ activity }: ActivityProps) {
                 <Image src={bill /*expense.category*/} alt="Bill icon" width={35} height={35} />
                 <div>
                     {activity.content}
-                    {formatDate(activity.date)}
+                    {formatDate(activity.createdAt)}
                 </div>
             </div>
             <Separator />

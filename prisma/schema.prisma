@@ -9,18 +9,18 @@ generator client {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -36,13 +36,16 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id             String         @id @default(cuid())
+  name           String?
+  email          String?        @unique
+  emailVerified  DateTime?
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+  expenseCreated Expense[]      @relation("ExpenseCreated")
+  expenseUpdated Expense[]      @relation("ExpenseUpdated")
+  GroupMembers   GroupMembers[]
 }
 
 model VerificationToken {
@@ -54,40 +57,47 @@ model VerificationToken {
 }
 
 model Group {
-  id            String    @id @default(cuid())
-  name          String?
-  image         String?
-  members       User[]
-  whiteboard    String?
-      id: number
-    cover: string
-    createdAt: Date
-    inviteLink: URL
-    groupType: GroupType
-    originalDebts: any
-    simplifiedDebts: any
+  id           String         @id @default(cuid())
+  name         String?
+  image        String?
+  whiteboard   String?
+  cover        String
+  createdAt    DateTime
+  groupType    String
+  GroupMembers GroupMembers[]
+  Expense      Expense[]
+}
+
+model GroupMembers {
+  group    Group  @relation(fields: [groupId], references: [id])
+  groupId  String
+  member   User   @relation(fields: [memberId], references: [id])
+  memberId String
+
+  @@unique([groupId, memberId])
 }
 
 model Expense {
-  id            String    @id @default(cuid())
-  description   String
-  comments      String?
-  category      String
-  createdAt     DateTime
-  createdBy     User
-  updatedAt     DateTime?
-  updatedBy     User?
-  cost          Int
-  currency      String
-  groupId:      Int
-  repayment: Repayment[]
+  id          String    @id @default(cuid())
+  description String
+  comments    String?
+  category    String
+  createdAt   DateTime
+  createdById User      @relation("ExpenseCreated", fields: [createdBy], references: [id], onDelete: Cascade)
+  createdBy   String
+  updatedAt   DateTime?
+  updatedById User?     @relation("ExpenseUpdated", fields: [updatedBy], references: [id], onDelete: Cascade)
+  updatedBy   String?
+  cost        Int
+  currency    String
+  group       Group     @relation(fields: [groupId], references: [id])
+  groupId     String
 }
 
 model Notification {
-  content     String
-  createdAt   DateTime
-  createdBy   Int
-  id: number
-  source: any
-  image       String?
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime
+  createdBy String
+  image     String?
 }

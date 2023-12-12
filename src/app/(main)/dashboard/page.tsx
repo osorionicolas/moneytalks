@@ -1,7 +1,4 @@
 "use client"
-import ExpenseField from "@/components/ExpenseField"
-import { ExpenseModal } from "@/components/ExpenseModal"
-import { Category } from "@/lib/definitions"
 import SectionHeader from "@/components/SectionHeader"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"

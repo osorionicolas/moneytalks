@@ -14,7 +14,6 @@ export default function Friend({ params }: { params: { id: string } }) {
         } as User],
         cover: "",
         groupType: GroupType.HOME,
-        inviteLink: "",
         originalDebts: {},
         simplifiedDebts: {}
     }
