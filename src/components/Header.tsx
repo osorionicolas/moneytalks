@@ -23,10 +23,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 export default function Header() {
   const { data: session } = useSession()
   return (
-      <header className="flex w-full justify-center px-4 py-2 bg-green-500 text-white gap-80">
+      <header className="flex w-full sm:justify-center justify-between px-4 py-2 bg-green-500 text-white sm:gap-80">
           <div className="flex justify-center items-center basis-1/3">
               <Link href="/" className="rounded-md">
-                  <div className="text-xl font-bold cursor-pointer px-4 py-2 opacity-80 hover:opacity-100">Moneytalks</div>
+                  <div className="text-xl font-bold cursor-pointer px-4 py-2 opacity-80 hover:opacity-100">Moneytalk$</div>
               </Link>
           </div>
           <div className="flex justify-center items-center basis-1/3">
@@ -34,7 +34,7 @@ export default function Header() {
                   <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                           <Button variant="ghost" className="text-md">
-                              {session?.user?.name}
+                              {session.user?.name || session.user?.email?.split("@")[0]}
                               <ChevronDown size={16} />
                           </Button>
                       </DropdownMenuTrigger>

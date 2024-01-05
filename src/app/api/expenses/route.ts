@@ -1,7 +1,17 @@
 import { type NextRequest } from "next/server"
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
-    const query = searchParams.get("query")
-    // query is "hello" for /api/search?query=hello
+    const groupId = searchParams.get("groupId")
+    
+    const expenses = await prisma.expense.findMany({
+        where: {
+            ...(groupId ? {id: groupId} : {})
+        },
+        include: {
+            createdById: true,
+            updatedById: true,
+        },
+    })
+    return expenses
 }

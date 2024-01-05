@@ -1,17 +1,8 @@
-"use client"
 import SectionHeader from "@/components/SectionHeader"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 
-async function getMainData() {
-    const res = await fetch("/api/main")
-    const data = await res.json()
-    return data.data
-}
-
-export default function Dashboard() {
-    const data = getMainData()
-
+export default async function Dashboard() {
     return (
         <>
             <SectionHeader title="Dashboard" />

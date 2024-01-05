@@ -1,14 +1,12 @@
-"use client"
-import { Flag, Home, List, Plus } from "lucide-react"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { Flag, Home, List, Plus, UsersRound } from "lucide-react"
+import { useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import Link from "next/link"
 import { FriendModal } from "./FriendModal"
+import { Group } from "@/lib/definitions"
 
-export default function LeftColumn() {
+export default async function LeftColumn({data}: any) {
     const { data: session } = useSession()
-    // const groups = useGroups()
-    // const frinds = useFriends()
     return (
         <div className="basis-5/12 items-end">
             <div className="p-4">
@@ -40,18 +38,19 @@ export default function LeftColumn() {
                             </Link>
                         </Button>
                     </div>
-                    <div>
-                        
-                    </div>
+                    {data.groups.map((group: Group) => (
+                        <Link key={group.id} href={`/groups/${group.id}`}>
+                            <UsersRound size={16} />
+                            {group.name}
+                        </Link>
+                    ))}
                 </div>
                 <div>
                     <div className="flex bg-gray-100">
                         Friends
                         <FriendModal />
                     </div>
-                    <div>
-
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </div>
