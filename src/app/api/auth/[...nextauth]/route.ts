@@ -13,9 +13,9 @@ export const authOptions: AuthOptions = {
         createUser: async (data: User) => {
             const createdUser = await prisma.user.create({ data })
             console.log(createdUser)
-            //prePopulateUserData(createdUser); 
-            return createdUser;
-        }
+            //prePopulateUserData(createdUser);
+            return createdUser
+        },
     },
     providers: [
         ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET

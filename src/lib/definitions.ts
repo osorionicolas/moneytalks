@@ -102,3 +102,9 @@ export type MainResponse = {
     notifications: Notification[]
     metadata: Metadata
 }
+
+export type Menu = {
+    href: string
+    icon: string
+    title: string
+}

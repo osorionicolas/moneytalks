@@ -1,23 +1,23 @@
-import { NextResponse } from "next/server"
-import { MainResponse, RegistrationStatus } from "@/lib/definitions"
+import { NextRequest, NextResponse } from "next/server"
+import { MainResponse } from "@/lib/definitions"
 import prisma from "@/lib/prisma"
 
-export async function GET() {
-    //const data = await res.json()
-    const userId = 'clqzqm5tz0003dk2kggy98lwc'
+export async function GET(req: NextRequest) {
+    const token = req.cookies.get("next-auth.session-token")
+    const session = await prisma.session.findUnique({ where: { sessionToken: token?.value } })
     const user = await prisma.user.findUnique({
         where: {
-            id: userId
-        }
+            id: session?.userId
+        },
     })
     const groups = await prisma.group.findMany({
         where: {
             members: {
                 some: {
-                    memberId: userId
-                }
-            }
-        }
+                    memberId: session?.userId,
+                },
+            },
+        },
     })
     //const friends = await prisma.group.findMany()
     const data: MainResponse = {
