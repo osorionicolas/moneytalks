@@ -31,14 +31,17 @@ export type Friend = {
 
 export type Group = {
     id: string
-    cover: string
-    createdAt: Date
     name: string
+    avatar: string
+    createdAt: Date
+    updatedAt: Date
     members: User[]
-    groupType: GroupType
+    originalDebts: any[]
+    simplifiedDebts: any[]
     whiteboard?: string
-    originalDebts: any
-    simplifiedDebts: any
+    groupType: GroupType
+    inviteLink: string
+    groupRemainders: any
 }
 
 export type User = {

@@ -55,21 +55,21 @@ model VerificationToken {
 }
 
 model Group {
-  id           String         @id @default(cuid())
+  id           String     @id @default(cuid())
   name         String?
   image        String?
   whiteboard   String?
   cover        String
-  createdAt    DateTime
-  groupType    String
+  createdAt    DateTime   @map("created_at")
+  groupType    String     @map("group_type")
   expenses     Expense[]
   members      GroupMembers[]
 }
 
 model GroupMembers {
-  groupId  String
+  groupId  String @map("group_id")
   group    Group  @relation(fields: [groupId], references: [id])
-  memberId String
+  memberId String @map("member_id")
   member   User   @relation(fields: [memberId], references: [id])
 
   @@unique([groupId, memberId])
@@ -80,22 +80,22 @@ model Expense {
   description String
   comments    String?
   category    String
-  createdAt   DateTime
-  updatedAt   DateTime?
+  createdAt   DateTime  @map("created_at")
+  updatedAt   DateTime? @map("updated_at")
   cost        Int
   currency    String
-  groupId     String
-  createdBy   String
-  updatedBy   String?
-  createdById User      @relation("ExpenseCreated", fields: [createdBy], references: [id], onDelete: Cascade)
+  groupId     String    @map("group_id")
+  createdBy   String    @map("created_by")
+  updatedBy   String?   @map("updated_by")
   group       Group     @relation(fields: [groupId], references: [id])
+  createdById User      @relation("ExpenseCreated", fields: [createdBy], references: [id], onDelete: Cascade)
   updatedById User?     @relation("ExpenseUpdated", fields: [updatedBy], references: [id], onDelete: Cascade)
 }
 
 model Notification {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   content   String
-  createdAt DateTime
-  createdBy String
+  createdAt DateTime  @map("created_at")
+  createdBy String    @map("created_by")
   image     String?
 }

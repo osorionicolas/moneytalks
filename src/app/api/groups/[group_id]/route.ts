@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server"
+
 export async function GET(request: Request, { params }: { params: { group_id: string } }) {
     const groupId = params.group_id
     const group = await prisma.group.findUnique({
@@ -5,5 +7,5 @@ export async function GET(request: Request, { params }: { params: { group_id: st
             id: groupId
         }
     })
-    return group
+    return NextResponse.json(group)
 }

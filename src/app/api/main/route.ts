@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma"
 
 export async function GET(req: NextRequest) {
     const token = req.cookies.get("next-auth.session-token")
+    if(!token) return NextResponse.json({ message: "Auth required" }, { status: 401 })
     const session = await prisma.session.findUnique({ where: { sessionToken: token?.value } })
     const user = await prisma.user.findUnique({
         where: {
@@ -29,5 +30,5 @@ export async function GET(req: NextRequest) {
         },
         notifications: [],
     }
-    return NextResponse.json({ data })
+    return NextResponse.json(data)
 }

@@ -10,7 +10,7 @@ export default function MainLayout({
   return (
       <div className="flex [&>*]:flex [&>*]:flex-col">
           <LeftColumn />
-          <main className="basis-7/12 min-h-screen flex-col p-4 shadow-lg">{children}</main>
+          <main className="basis-7/12 min-h-screen flex-col shadow-lg">{children}</main>
           <RightColumn />
       </div>
   )

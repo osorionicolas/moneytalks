@@ -51,16 +51,16 @@ CREATE TABLE "Group" (
     "image" TEXT,
     "whiteboard" TEXT,
     "cover" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
-    "groupType" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL,
+    "group_type" TEXT NOT NULL,
 
     CONSTRAINT "Group_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "GroupMembers" (
-    "groupId" TEXT NOT NULL,
-    "memberId" TEXT NOT NULL
+    "group_id" TEXT NOT NULL,
+    "member_id" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -69,13 +69,13 @@ CREATE TABLE "Expense" (
     "description" TEXT NOT NULL,
     "comments" TEXT,
     "category" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
-    "updatedAt" TIMESTAMP(3),
+    "created_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3),
     "cost" INTEGER NOT NULL,
     "currency" TEXT NOT NULL,
-    "groupId" TEXT NOT NULL,
-    "createdBy" TEXT NOT NULL,
-    "updatedBy" TEXT,
+    "group_id" TEXT NOT NULL,
+    "created_by" TEXT NOT NULL,
+    "updated_by" TEXT,
 
     CONSTRAINT "Expense_pkey" PRIMARY KEY ("id")
 );
@@ -84,8 +84,8 @@ CREATE TABLE "Expense" (
 CREATE TABLE "Notification" (
     "id" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
-    "createdBy" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL,
+    "created_by" TEXT NOT NULL,
     "image" TEXT,
 
     CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
@@ -107,7 +107,7 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "GroupMembers_groupId_memberId_key" ON "GroupMembers"("groupId", "memberId");
+CREATE UNIQUE INDEX "GroupMembers_group_id_member_id_key" ON "GroupMembers"("group_id", "member_id");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -116,16 +116,16 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "GroupMembers" ADD CONSTRAINT "GroupMembers_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "Group"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "GroupMembers" ADD CONSTRAINT "GroupMembers_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "Group"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "GroupMembers" ADD CONSTRAINT "GroupMembers_memberId_fkey" FOREIGN KEY ("memberId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "GroupMembers" ADD CONSTRAINT "GroupMembers_member_id_fkey" FOREIGN KEY ("member_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Expense" ADD CONSTRAINT "Expense_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "Group"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Expense" ADD CONSTRAINT "Expense_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "Group"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_created_by_fkey" FOREIGN KEY ("created_by") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Expense" ADD CONSTRAINT "Expense_updatedBy_fkey" FOREIGN KEY ("updatedBy") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_updated_by_fkey" FOREIGN KEY ("updated_by") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

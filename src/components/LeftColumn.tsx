@@ -1,5 +1,4 @@
 import { Flag, Home, List, Plus, UserRound, UsersRound } from "lucide-react"
-import { useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import Link from "next/link"
 import { FriendModal } from "./FriendModal"
@@ -8,7 +7,6 @@ import { useMainData } from "@/hooks/useMainData"
 import { Input } from "./ui/input"
 
 export default function LeftColumn() {
-    const { data: session } = useSession()
     const { data } = useMainData()
     const menus = {
         dashboard: {

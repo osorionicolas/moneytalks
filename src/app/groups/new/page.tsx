@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import groupImage from "../../../../public/groups1.jpeg"
 import { useState } from "react"
+import { Separator } from "@/components/ui/separator"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 
 export default function Groups() {
@@ -29,9 +31,32 @@ export default function Groups() {
                         <Input type="file" className="cursor-pointer" onChange={updateImage} />
                     </div>
                     <div className="grid pt-5">
-                        <div className="text-lg">Start a new group</div>
-                        <div className="self-end pb-2">My group shall be called…</div>
+                        <span className="text-lg">START A NEW GROUP</span>
+                        <span className="self-end pb-2">My group shall be called…</span>
                         <Input type="text" placeholder="Group name" />
+                        <Separator />
+                        <span className="text-lg">GROUP MEMBERS</span>
+                        <div className="flex gap-2">
+                            <Input type="text" placeholder="Name" />
+                            <Input type="text" placeholder="Email address" />
+                        </div>
+                        <div className="flex gap-2">
+                            <Input type="text" placeholder="Name" />
+                            <Input type="text" placeholder="Email address" />
+                        </div>
+                        <div>+ Add a person</div>
+                        <div className="flex items-center gap-5">
+                            <span>GROUP TYPE</span>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    {["Home"].map((type) => {
+                                        ;<DropdownMenuItem>{type}</DropdownMenuItem>
+                                    })}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
+
                         <Button type="submit" className="self-end">
                             Save
                         </Button>

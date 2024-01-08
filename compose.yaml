@@ -13,4 +13,17 @@ services:
       - POSTGRES_DB=moneytalks
     ports:
       - 5432:5432
+  smtp:
+    image: boky/postfix
+    container_name: smtp
+    environment:
+      RELAYHOST: smtp.gmail.com:587
+      RELAYHOST_USERNAME: osorionicolas95@gmail.com
+      RELAYHOST_PASSWORD: inloqykqcbvamfmf
+      ALLOW_EMPTY_SENDER_DOMAINS: true
+      TZ: Europe/Madrid
+    ports:
+      - "25:587"
+    restart: always
+    network_mode: bridge
     

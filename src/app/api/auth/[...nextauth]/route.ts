@@ -6,6 +6,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { User } from "@prisma/client"
 import { AuthOptions } from "next-auth"
 import prisma from "@/lib/prisma"
+import { sendVerificationRequest } from "@/lib/email-templates"
 
 export const authOptions: AuthOptions = {
     adapter: {
@@ -29,7 +30,7 @@ export const authOptions: AuthOptions = {
         Email({
             server: process.env.EMAIL_SERVER ?? "",
             from: process.env.EMAIL_FROM ?? "",
-            //sendVerificationRequest
+            sendVerificationRequest
         }),
         ...(process.env.KEYCLOAK_CLIENT_ID && process.env.KEYCLOAK_CLIENT_SECRET
             ? [
