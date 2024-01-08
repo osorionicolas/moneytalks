@@ -1,0 +1,23 @@
+name: Build and push Docker images
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  CONTAINER_IMAGE: osorionicolas/${{github.event.repository.name}}:latest
+jobs:
+  build-push:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Docker Hub login
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: Build image
+        run: docker build -t $CONTAINER_IMAGE .
+      - name: Push to Docker Hub
+        run: docker push $CONTAINER_IMAGE
